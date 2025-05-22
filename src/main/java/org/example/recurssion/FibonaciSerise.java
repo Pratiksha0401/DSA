@@ -7,6 +7,11 @@ package org.example.recurssion;
  */
 public class FibonaciSerise {
 
+    /**
+     * Main method to test Fibonacci number and series.
+     *
+     * @param args Command-line arguments (not used).
+     */
     public static void main(String[] args) {
         int n = 5;
 
@@ -25,10 +30,13 @@ public class FibonaciSerise {
      * @return The n-th Fibonacci number.
      *
      * Time Complexity: O(2^n)
-     * - Each call branches into two more calls, leading to exponential growth.
+     * - Because the function calls itself twice for each non-base case,
+     *   the number of calls grows exponentially.
+     * - This leads to a binary recursion tree of height `n`.
      *
      * Space Complexity: O(n)
-     * - Recursive stack depth is proportional to n.
+     * - The maximum depth of the recursion stack is `n`.
+     * - Each recursive call adds one frame to the call stack.
      */
     public static int fibo(int n) {
         if (n <= 1) {
