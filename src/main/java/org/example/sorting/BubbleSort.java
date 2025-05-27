@@ -2,19 +2,26 @@ package org.example.sorting;
 
 public class BubbleSort {
     public static void main(String[] args) {
-        int [] arr = {-1,-123,2,0,2,4,1};
-        int n = arr.length;
-        for(int i=0;i<n-1;i++){
-            for(int j=0;j<n-1-i;j++){
-                if(arr[j]>arr[j+1]) {
-                    int temp = arr[j];
-                    arr[j] = arr[j+1];
-                    arr[j+1]=temp;
+        int [] arr1 = {25,48,75,2,48,15,6,7,39,54};
+        int [] arr = {1,2,3,4,5,6};
+        for(int i=0;i<arr.length;i++){
+            int isSwap =0;
+            for(int j =0;j< arr.length-i-1;j++){
+                if(arr[j]>arr[j+1]){
+                    int tmp = arr[j];
+                    arr[j]=arr[j+1];
+                    arr[j+1]=tmp;
+                    isSwap=1;
                 }
             }
+            if(isSwap==0){
+                break;
+            }
+            System.out.println("runs");
         }
-        for (int a : arr){
-            System.out.println(a+" ");
+
+        for(int n : arr){
+            System.out.println(n);
         }
     }
 }
