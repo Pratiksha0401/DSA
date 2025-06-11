@@ -8,5 +8,18 @@ public class FindTheNoThatApperasOnce {
             xor = xor ^ arr[i];
         }
         System.out.println(xor);
+
+
+        for(int i=0;i< arr.length;i++){
+            int cnt =0;
+            for(int j=0;j<arr.length;j++){
+                if(arr[j]==arr[i]){
+                    cnt++;
+                }
+            }
+            if(cnt==1){
+                System.out.println(arr[i]);
+            }
+        }
     }
 }
