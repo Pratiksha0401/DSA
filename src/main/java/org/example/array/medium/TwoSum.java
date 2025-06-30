@@ -1,4 +1,4 @@
-package org.example.array;
+package org.example.array.medium;
 
 import java.util.HashMap;
 import java.util.Map;
