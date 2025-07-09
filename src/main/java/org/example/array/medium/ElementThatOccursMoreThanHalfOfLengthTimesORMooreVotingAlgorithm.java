@@ -12,7 +12,7 @@ import java.util.Map;
  * 2. Better approach using HashMap
  * 3. Optimal approach using Boyer-Moore Voting Algorithm
  */
-public class ElementThatOccursMoreThanHalfOfLengthTimes {
+public class ElementThatOccursMoreThanHalfOfLengthTimesORMooreVotingAlgorithm {
 
     public static void main(String[] args) {
         int arr[] = {2, 4, 1, 2, 2, 2, 1, 8, 3, 4, 2, 2, 2};
