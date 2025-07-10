@@ -6,15 +6,15 @@ import java.util.List;
 
 public class RearrangeAlternatePositiveAndNegativeEle {
     public static void main(String[] args) {
-        int [] arrBruteForce={3,1,-2,8,-4,-2,4,6,-1,-7};
-        bruteForce(arrBruteForce);
-        System.out.println(Arrays.toString(arrBruteForce));
+//        int [] arrBruteForce={3,1,-2,8,-4,-2,4,6,-1,-7};
+//        bruteForce(arrBruteForce);
+//        System.out.println(Arrays.toString(arrBruteForce));
+//
+//        int [] arrBetterForce={3,1,-2,8,-4,-2,4,6,-1,-7};
+//        System.out.println(Arrays.toString(betterForce(arrBetterForce)));
 
-        int [] arrBetterForce={3,1,-2,8,-4,-2,4,6,-1,-7};
-        System.out.println(Arrays.toString(betterForce(arrBetterForce)));
-
-//        int [] optimalForceArr={3,1,-2,8,-4,-2,4,6,-1,-7};
-//        System.out.println(Arrays.toString(optimalForce(optimalForceArr)));
+        int [] optimalArr={3,1,-2,8,-4,-2,4,6,-1,-7,4,-3,-7,-2};
+        System.out.println(Arrays.toString(optimalForce(optimalArr)));
 
     }
 
@@ -52,56 +52,50 @@ public class RearrangeAlternatePositiveAndNegativeEle {
     }
 
 
-//    //optimal approach if +ve and _ves are different in lengths
-//    public static ArrayList<Integer> optimalForce(ArrayList<Integer> A, int n) {
-//        // Define 2 ArrayLists, one for storing positive
-//        // and other for negative elements of the array.
-//        ArrayList<Integer> pos = new ArrayList<>();
-//        ArrayList<Integer> neg = new ArrayList<>();
-//
-//        // Segregate the array into positives and negatives.
-//        for (int i = 0; i < n; i++) {
-//            if (A.get(i) > 0)
-//                pos.add(A.get(i));
-//            else
-//                neg.add(A.get(i));
-//        }
-//
-//        // If positives are lesser than the negatives.
-//        if (pos.size() < neg.size()) {
-//
-//            // First, fill array alternatively till the point
-//            // where positives and negatives are equal in number.
-//            for (int i = 0; i < pos.size(); i++) {
-//                A.set(2 * i, pos.get(i));
-//                A.set(2 * i + 1, neg.get(i));
-//            }
-//
-//            // Fill the remaining negatives at the end of the array.
-//            int index = pos.size() * 2;
-//            for (int i = pos.size(); i < neg.size(); i++) {
-//                A.set(index, neg.get(i));
-//                index++;
-//            }
-//        }
-//
-//        // If negatives are lesser than the positives.
-//        else {
-//            // First, fill array alternatively till the point
-//            // where positives and negatives are equal in number.
-//            for (int i = 0; i < neg.size(); i++) {
-//                A.set(2 * i, pos.get(i));
-//                A.set(2 * i + 1, neg.get(i));
-//            }
-//
-//            // Fill the remaining positives at the end of the array.
-//            int index = neg.size() * 2;
-//            for (int i = neg.size(); i < pos.size(); i++) {
-//                A.set(index, pos.get(i));
-//                index++;
-//            }
-//        }
-//        return A;
-//    }
+    //optimal approach if +ve and _ves are different in lengths
+    public static int[] optimalForce(int[] arr) {
+        // Define 2 ArrayLists, one for storing positive
+        // and other for negative elements of the array.
+        List<Integer> pos = new ArrayList<>();
+        List<Integer> neg = new ArrayList<>();
+        int[] resultArr =  new int[arr.length];
+
+        // Segregate the array into positives and negatives.
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] > 0)
+                pos.add(arr[i]);
+            else
+                neg.add(arr[i]);
+        }
+
+        System.out.println(pos);
+        System.out.println(neg);
+        if(pos.size()>neg.size()){
+            for(int i =0;i<neg.size();i++){
+                resultArr[2*i] = pos.get(i);
+                resultArr[2*i+1] = neg.get(i);
+            }
+            int indices = neg.size()*2;
+            for(int i=neg.size();i< pos.size();i++) {
+                resultArr[indices] = pos.get(i);
+                indices++;
+            }
+        }
+
+        if(pos.size()<neg.size()){
+            for(int i =0;i<pos.size();i++){
+                resultArr[2*i] = pos.get(i);
+                resultArr[2*i+1] = neg.get(i);
+            }
+            int indices = pos.size()*2;
+            for(int i=pos.size();i< neg.size();i++) {
+                resultArr[indices] = neg.get(i);
+                indices++;
+            }
+        }
+        System.out.println(Arrays.toString(resultArr));
+
+        return resultArr;
+    }
 }
 
