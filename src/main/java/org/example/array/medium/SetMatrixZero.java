@@ -10,11 +10,46 @@ public class SetMatrixZero {
         matrix.add(new ArrayList<>(Arrays.asList(1,1,1)));
         matrix.add(new ArrayList<>(Arrays.asList(1,0,1)));
         matrix.add(new ArrayList<>(Arrays.asList(1,1,1)));
-        setMatrixZero(matrix);
+        int n = matrix.size();
+        int m = matrix.get(0).size();
+        setMatrixZeroBrute(matrix,n,m);
         System.out.println(matrix);
     }
 
-    public static void setMatrixZero(List<ArrayList<Integer>> list){
-        list.add(new ArrayList<>(Arrays.asList(1,2,3)));
+    public static void setMatrixZeroBrute(List<ArrayList<Integer>> list, int n ,int m){
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(list.get(i).get(j)==0){
+                    markRow(list,n,m,i);
+                    markCol(list,n,m,j);
+                }
+            }
+        }
+
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(list.get(i).get(j)==-1){
+                    list.get(i).set(j, 0);
+                }
+            }
+        }
+    }
+
+    static void markRow(List<ArrayList<Integer>> matrix, int n, int m, int i) {
+        // set all non-zero elements as -1 in the row i:
+        for (int j = 0; j < m; j++) {
+            if (matrix.get(i).get(j) != 0) {
+                matrix.get(i).set(j, -1);
+            }
+        }
+    }
+
+    static void markCol(List<ArrayList<Integer>> matrix, int n, int m, int j) {
+        // set all non-zero elements as -1 in the col j:
+        for (int i = 0; i < n; i++) {
+            if (matrix.get(i).get(j) != 0) {
+                matrix.get(i).set(j, -1);
+            }
+        }
     }
 }
