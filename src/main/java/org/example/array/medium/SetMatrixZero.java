@@ -14,6 +14,16 @@ public class SetMatrixZero {
         int m = matrix.get(0).size();
         setMatrixZeroBrute(matrix,n,m);
         System.out.println(matrix);
+
+
+        List<ArrayList<Integer>> matrix1 = new ArrayList<>();
+        matrix1.add(new ArrayList<>(Arrays.asList(1,1,1)));
+        matrix1.add(new ArrayList<>(Arrays.asList(1,0,1)));
+        matrix1.add(new ArrayList<>(Arrays.asList(1,1,1)));
+        int k = matrix1.size();
+        int l = matrix1.get(0).size();
+        setMatrixZeroBetter(matrix1,k,l);
+        System.out.println(matrix1);
     }
 
     public static void setMatrixZeroBrute(List<ArrayList<Integer>> list, int n ,int m){
@@ -51,5 +61,28 @@ public class SetMatrixZero {
                 matrix.get(i).set(j, -1);
             }
         }
+    }
+
+    public static void setMatrixZeroBetter(List<ArrayList<Integer>> list, int n ,int m){
+        int row[] = new int[n];
+        int col[] = new int[m];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if(list.get(i).get(j)==0){
+                    row[i]=1;
+                    col[j]=1;
+                }
+            }
+        }
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if(row[i]==1 || col[j]==1){
+                    list.get(i).set(j,0);
+                }
+            }
+        }
+
+
     }
 }
