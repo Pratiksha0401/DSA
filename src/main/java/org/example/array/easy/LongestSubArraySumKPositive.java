@@ -1,5 +1,8 @@
 package org.example.array.easy;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class LongestSubArraySumKPositive {
     public static void main(String[] args) {
         int arr[] = {1,2,3,1,4,2,1,1,2,1,3};
@@ -13,8 +16,14 @@ public class LongestSubArraySumKPositive {
         int arr1[] = {1,2,3,1,4,2,1,1,2,1,3};
         int k1 = 7;
         int n1 = arr1.length;
-        int longestSubArrayLength1 = getLongestSubArrayLengthBetter(arr1, k);
+        int longestSubArrayLength1 = getLongestSubArrayLengthBetter(arr1, k1);
         System.out.println(longestSubArrayLength1);
+
+        int arr2[] = {1,2,3,1,4,2,1,1,2,1,3};
+        int k2 = 7;
+        int n2 = arr2.length;
+        int longestSubArrayLength2 = getLongestSubArrayLengthPrefixSum(arr2, k2);
+        System.out.println(longestSubArrayLength2);
     }
 
     public static int getLongestSubArrayLengthBruteForce(int [] arr,int k){
@@ -42,6 +51,28 @@ public class LongestSubArraySumKPositive {
                 if(sum==k){
                     mLen = Math.max(mLen,j-i+1);
                 }
+            }
+        }
+        return mLen;
+    }
+
+    public static int getLongestSubArrayLengthPrefixSum(int [] arr,int k){
+        int mLen = 0;
+        int sum =0;
+        Map<Integer, Integer> hm= new HashMap<>();
+        for (int i = 0; i < arr.length; i++) {
+            sum +=arr[i];
+            if(sum==k){
+                mLen = Math.max(mLen,i+1);
+            }
+            int rem = sum -k;
+            if(hm.containsKey(rem)){
+                int len = i - hm.get(rem);
+                mLen = Math.max(mLen,len);
+            }
+
+            if(!hm.containsKey(sum)){
+                hm.put(sum,i);
             }
         }
         return mLen;
