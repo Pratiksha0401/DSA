@@ -1,6 +1,4 @@
-package org.example.array;
-
-import java.util.Arrays;
+package org.example.array.easy;
 
 public class Array1 {
     public static void main(String[] args) {

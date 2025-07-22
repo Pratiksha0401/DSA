@@ -1,4 +1,4 @@
-package org.example.array;
+package org.example.array.easy;
 
 /**
  * This class provides different methods to find the missing number

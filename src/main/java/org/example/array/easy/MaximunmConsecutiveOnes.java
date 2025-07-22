@@ -1,4 +1,4 @@
-package org.example.array;
+package org.example.array.easy;
 
 public class MaximunmConsecutiveOnes {
     public static void main(String[] args) {

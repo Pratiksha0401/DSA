@@ -1,4 +1,4 @@
-package org.example.array;
+package org.example.array.easy;
 
 /**
  * A utility class to check if an array is a sorted and rotated array.

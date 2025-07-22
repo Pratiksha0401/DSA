@@ -1,4 +1,4 @@
-package org.example.array;
+package org.example.array.easy;
 
 /**
  * This class provides methods to rotate an array to the left by 'k' positions.
