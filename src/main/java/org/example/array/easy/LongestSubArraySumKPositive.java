@@ -24,6 +24,13 @@ public class LongestSubArraySumKPositive {
         int n2 = arr2.length;
         int longestSubArrayLength2 = getLongestSubArrayLengthPrefixSum(arr2, k2);
         System.out.println(longestSubArrayLength2);
+
+
+        int arr3[] = {1,2,3,1,4,2,1,1,2,1,3};
+        int k3 = 7;
+        int n3 = arr2.length;
+        int longestSubArrayLength3 = getLongestSubArrayLengthTwoPointer(arr3, k3);
+        System.out.println(longestSubArrayLength3);
     }
 
     public static int getLongestSubArrayLengthBruteForce(int [] arr,int k){
@@ -74,6 +81,30 @@ public class LongestSubArraySumKPositive {
             if(!hm.containsKey(sum)){
                 hm.put(sum,i);
             }
+        }
+        return mLen;
+    }
+
+
+    public static int getLongestSubArrayLengthTwoPointer(int [] arr,int k){
+        int mLen = 0;
+        int sum =0;
+        int left =0;
+        int right = 0;
+        int n = arr.length;
+        while (right<n){
+            if(left<=right && sum > k){
+                sum -=arr[left];
+                left++;
+            }
+            if(sum==k){
+                mLen = Math.max(mLen, right-left+1);
+            }
+            right++;
+            if(right<n){
+                sum +=arr[right];
+            }
+
         }
         return mLen;
     }
