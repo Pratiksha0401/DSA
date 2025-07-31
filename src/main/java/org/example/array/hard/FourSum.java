@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * This class provides three approaches to solve the 4Sum problem,
  * where the task is to find all unique quadruplets in an array that sum up to zero.
- *
+ * <p>
  * Approaches:
  * 1. Brute Force (O(n^4) time)
  * 2. Better (HashSet-based) (O(n^3) time)
@@ -13,7 +13,7 @@ import java.util.*;
  */
 public class FourSum {
     public static void main(String[] args) {
-        int arr[] = {-1,-2,-3,-1,0,-1,1,2,-1,0,0,2,3,1,-1,-2};
+        int arr[] = {-1, -2, -3, -1, 0, -1, 1, 2, -1, 0, 0, 2, 3, 1, -1, -2};
         int target = 0;
 
         List<List<Integer>> lists = bruteForce(arr);
@@ -27,6 +27,16 @@ public class FourSum {
         List<List<Integer>> list2 = optimalApproach(arr);
         System.out.println("Optimal Approach Output:");
         System.out.println(list2);
+
+        int nums[] = {1000000000, 1000000000, 1000000000, 1000000000};
+        List<List<Integer>> list3 = fourSum(nums, 0);
+        System.out.println("Optimal Approach Output:");
+        System.out.println(list3);
+
+        int nums1[] = {1000000000, 1000000000, 1000000000, 1000000000};
+        List<List<Integer>> list4 = fourSumMy(nums1, 0);
+        System.out.println("Optimal Approach Output mmy:");
+        System.out.println(list4);
     }
 
     /**
@@ -132,5 +142,68 @@ public class FourSum {
             }
         }
         return lists;
+    }
+
+    public static List<List<Integer>> fourSum(int[] nums, int target) {
+        Arrays.sort(nums);
+        List<List<Integer>> list = new ArrayList<>();
+        int n = nums.length;
+
+        for (int i = 0; i < n; i++) {
+            if (i > 0 && nums[i] == nums[i - 1]) continue;
+
+            for (int j = i + 1; j < n; j++) {
+                if (j > i + 1 && nums[j] == nums[j - 1]) continue;
+
+                int k = j + 1, l = n - 1;
+                while (k < l) {
+                    long sum = (long) nums[i] + nums[j] + nums[k] + nums[l];
+
+                    if (sum == target) {
+                        list.add(Arrays.asList(nums[i], nums[j], nums[k], nums[l]));
+                        k++;
+                        l--;
+
+                        while (k < l && nums[k] == nums[k - 1]) k++;
+                        while (k < l && nums[l] == nums[l + 1]) l--;
+                    } else if (sum < target) {
+                        k++;
+                    } else {
+                        l--;
+                    }
+                }
+            }
+        }
+        return list;
+    }
+
+    public static List<List<Integer>> fourSumMy(int[] nums, int target) {
+        Arrays.sort(nums);
+        List<List<Integer>> list = new ArrayList<>();
+        int n = nums.length;
+        for(int i=0;i<n;i++){
+            if(i>0 && nums[i]==nums[i-1]) continue;
+            for(int j=i+1;j<n;j++){
+                if(j>i+1 && nums[j]==nums[j-1]) continue;
+
+                int k=j+1;
+                int l=n-1;
+                while(k<l){
+                    long sum = (long)(nums[i]+nums[j]+nums[k]+nums[l]);
+                    if(sum==target){
+                        list.add(Arrays.asList(nums[i],nums[j],nums[k],nums[l]));
+                        k++;l--;
+
+                        while(k<l && nums[k]==nums[k-1]) k++;
+                        while(k<l && nums[l]==nums[l+1]) l--;
+                    }else if(sum<target){
+                        k++;
+                    }else{
+                        l--;
+                    }
+                }
+            }
+        }
+        return list;
     }
 }
