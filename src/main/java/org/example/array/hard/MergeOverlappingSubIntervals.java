@@ -10,10 +10,10 @@ import java.util.List;
  * 1. Returning a List of Lists (mergeOverlappingIntervals).
  * 2. Returning a 2D array (merge).
  *
- * Problem Statement:
+ * <p><b>Problem Statement:</b>
  * Given a collection of intervals, merge all overlapping intervals and return the merged ones.
  *
- * Example:
+ * <p><b>Example:</b>
  * Input: [[1,3],[2,6],[8,10],[15,18]]
  * Output: [[1,6],[8,10],[15,18]]
  */
@@ -48,9 +48,12 @@ public class MergeOverlappingSubIntervals {
      *
      * @param arr input 2D array of intervals
      * @return list of merged intervals
+     *
+     * <p><b>Time Complexity:</b> O(n log n) for sorting + O(n^2) in worst case (nested loop).
+     * <br><b>Space Complexity:</b> O(n) for storing merged intervals.
      */
     public static List<List<Integer>> mergeOverlappingIntervals(int[][] arr) {
-        int n = arr.length; // size of the array
+        int n = arr.length;
 
         // Step 1: Sort intervals by start time
         Arrays.sort(arr, new Comparator<int[]>() {
@@ -99,6 +102,9 @@ public class MergeOverlappingSubIntervals {
      *
      * @param a input 2D array of intervals
      * @return merged intervals as int[][]
+     *
+     * <p><b>Time Complexity:</b> O(n log n) for sorting + O(n) for merging → O(n log n).
+     * <br><b>Space Complexity:</b> O(n) for storing merged intervals.
      */
     public static int[][] merge(int[][] a) {
         int n = a.length;
