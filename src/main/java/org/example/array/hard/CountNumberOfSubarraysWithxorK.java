@@ -10,6 +10,9 @@ public class CountNumberOfSubarraysWithxorK {
         int resultCnt1 = bruteForce(arr, target);
         System.out.println(resultCnt1);
 
+        int resultCnt2 = betterForce(arr, target);
+        System.out.println(resultCnt2);
+
         int resultCnt3 = xorOptimal(arr, target);
         System.out.println(resultCnt3);
 
@@ -25,6 +28,21 @@ public class CountNumberOfSubarraysWithxorK {
                 for (int l = i; l <= j; l++) {
                     xor = xor ^ nums[l];
                 }
+                if(xor==k){
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
+    //betterForce
+    public static int betterForce(int[] nums, int k){
+        int count =0;
+        for (int i = 0; i < nums.length; i++) {
+            int xor =0;
+            for (int j = i; j < nums.length; j++) {
+                xor ^= nums[j];
                 if(xor==k){
                     count++;
                 }
