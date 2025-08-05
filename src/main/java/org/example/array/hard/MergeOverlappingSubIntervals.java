@@ -36,6 +36,16 @@ public class MergeOverlappingSubIntervals {
         for (int[] interval : merge) {
             System.out.print("[" + interval[0] + ", " + interval[1] + "] ");
         }
+        System.out.println();
+
+        List<List<Integer>> ans1 = mergeOverlappingIntervalsBruteForce(arr);
+        System.out.println("The merged intervals are (List<List<Integer>>): \n");
+        for (List<Integer> it : ans1) {
+            System.out.print("[" + it.get(0) + ", " + it.get(1) + "] ");
+        }
+        System.out.println();
+
+
     }
 
     /**
@@ -139,5 +149,46 @@ public class MergeOverlappingSubIntervals {
 
         // Step 3: Convert to int[][]
         return ans.toArray(new int[ans.size()][]);
+    }
+
+    /**
+     * Merges overlapping intervals using a brute-force style approach
+     * (compared to the optimal merge).
+     *
+     * Steps:
+     * 1. Traverse each interval in the array.
+     * 2. If the result list is empty OR the current interval does not overlap
+     *    with the last interval in the list → add it as a new interval.
+     * 3. Otherwise (there is overlap), update the end of the last interval
+     *    in the list to the maximum of both ends.
+     *
+     * @param arr input 2D array of intervals (not necessarily sorted)
+     * @return list of merged intervals
+     *
+     * <p><b>Time Complexity:</b>
+     * - O(n log n) if the input array is pre-sorted by start time.
+     * - If not sorted, you should sort before calling this → O(n log n).
+     * <br><b>Space Complexity:</b> O(n) for storing merged intervals.
+     *
+     * <p><b>Note:</b>
+     * This method is simpler but assumes intervals are processed in sorted order.
+     * If `arr` is unsorted, results may be incorrect unless sorted first.
+     */
+    public static List<List<Integer>> mergeOverlappingIntervalsBruteForce(int[][] arr) {
+        List<List<Integer>> list = new ArrayList<>();
+
+        for (int i = 0; i < arr.length; i++) {
+            // Case 1: If no intervals added yet OR no overlap with last interval
+            if (list.isEmpty() || arr[i][0] > list.get(list.size() - 1).get(1)) {
+                list.add(Arrays.asList(arr[i][0], arr[i][1]));
+            }
+            // Case 2: Overlap → merge with last interval
+            else {
+                list.get(list.size() - 1).set(1,
+                        Math.max(list.get(list.size() - 1).get(1), arr[i][1]));
+            }
+        }
+
+        return list;
     }
 }
