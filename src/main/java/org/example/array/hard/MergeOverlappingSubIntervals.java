@@ -38,7 +38,7 @@ public class MergeOverlappingSubIntervals {
         }
         System.out.println();
 
-        List<List<Integer>> ans1 = mergeOverlappingIntervalsBruteForce(arr);
+        List<List<Integer>> ans1 = mergeOverlappingIntervalsOptimal(arr);
         System.out.println("The merged intervals are (List<List<Integer>>): \n");
         for (List<Integer> it : ans1) {
             System.out.print("[" + it.get(0) + ", " + it.get(1) + "] ");
@@ -174,7 +174,7 @@ public class MergeOverlappingSubIntervals {
      * This method is simpler but assumes intervals are processed in sorted order.
      * If `arr` is unsorted, results may be incorrect unless sorted first.
      */
-    public static List<List<Integer>> mergeOverlappingIntervalsBruteForce(int[][] arr) {
+    public static List<List<Integer>> mergeOverlappingIntervalsOptimal(int[][] arr) {
         List<List<Integer>> list = new ArrayList<>();
 
         for (int i = 0; i < arr.length; i++) {
