@@ -1,5 +1,8 @@
 package org.example.array.hard;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+
 /**
  * This class demonstrates merging two sorted arrays into sorted order
  * without using library utilities.
@@ -26,13 +29,32 @@ public class MergeTwoSortedArraysWithoutExtraSpace {
         // Display the merged result
         System.out.println("The merged arrays are:");
         System.out.print("arr1[] = ");
-        for (int i = 0; i < n; i++) {
-            System.out.print(arr1[i] + " ");
+        for (int k : arr1) {
+            System.out.print(k + " ");
         }
 
         System.out.print("\narr2[] = ");
-        for (int i = 0; i < m; i++) {
-            System.out.print(arr2[i] + " ");
+        for (int j : arr2) {
+            System.out.print(j + " ");
+        }
+        System.out.println();
+
+
+        int[] arr3 = {1, 4, 8, 10};
+        int[] arr4 = {2, 3, 9};
+
+        mergeOptimal(arr3, arr4, arr3.length, arr4.length);
+
+        // Display the merged result
+        System.out.println("The merged arrays are:");
+        System.out.print("arr3[] = ");
+        for (int j : arr3) {
+            System.out.print(j + " ");
+        }
+
+        System.out.print("\narr4[] = ");
+        for (int j : arr4) {
+            System.out.print(j + " ");
         }
         System.out.println();
     }
@@ -91,5 +113,25 @@ public class MergeTwoSortedArraysWithoutExtraSpace {
                 arr2[i - n] = arr[i];
             }
         }
+    }
+
+
+    public static void mergeOptimal(int[] arr1, int[] arr2, int n, int m) {
+        int left = n-1, right = 0;
+
+        // Put first n elements back to arr1 and the rest to arr2
+        while (left>=0 && right<m) {
+            if (arr1[left]>arr2[right]) {
+                int tmp = arr1[left];
+                arr1[left]=arr2[right];
+                arr2[right]=tmp;
+                left --;
+                right++;
+            } else {
+                break;
+            }
+        }
+        Arrays.sort(arr1);
+        Arrays.sort(arr2);
     }
 }
