@@ -59,6 +59,23 @@ public class MergeTwoSortedArraysWithoutExtraSpace {
             System.out.print(j + " ");
         }
         System.out.println();
+
+        int[]  nums1 = {1,2,3,0,0,0};
+        int[] nums2 = {2,5,6};
+        int n1 = 3, m1 = 3;
+
+        // Merging using brute force method
+        mergeLetCode(nums1, n1,nums2, m1);
+
+        // Display the merged result
+        System.out.println("The merged arrays using brute force are:");
+        System.out.print("nums1[] = ");
+        for (int k : nums1) {
+            System.out.print(k + " ");
+        }
+        System.out.println();
+
+
     }
 
     /**
@@ -148,5 +165,25 @@ public class MergeTwoSortedArraysWithoutExtraSpace {
         // Sort both arrays individually
         Arrays.sort(arr1);
         Arrays.sort(arr2);
+    }
+
+    public static void mergeLetCode(int[] nums1, int m, int[] nums2, int n) {
+        int i = m - 1;        // pointer for nums1's valid elements
+        int j = n - 1;        // pointer for nums2
+        int k = m + n - 1;    // pointer for placement in nums1
+
+        // Merge from the back
+        while (i >= 0 && j >= 0) {
+            if (nums1[i] > nums2[j]) {
+                nums1[k--] = nums1[i--];
+            } else {
+                nums1[k--] = nums2[j--];
+            }
+        }
+
+        // Copy remaining nums2 elements if any
+        while (j >= 0) {
+            nums1[k--] = nums2[j--];
+        }
     }
 }
