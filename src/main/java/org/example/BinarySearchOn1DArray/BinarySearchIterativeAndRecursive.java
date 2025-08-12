@@ -8,6 +8,9 @@ public class BinarySearchIterativeAndRecursive {
 
         int resultIndex = iterativeApproach(arr, target);
         System.out.println(resultIndex);
+
+        int resultIndexRecursive = recursiveApproach(arr,0, arr.length-1, target);
+        System.out.println(resultIndexRecursive);
     }
 
     public static int iterativeApproach(int[] arr, int target){
@@ -26,5 +29,19 @@ public class BinarySearchIterativeAndRecursive {
             }
         }
         return index;
+    }
+
+
+    public static int recursiveApproach(int[] arr, int low, int high, int target){
+        if (low>high) return -1;
+
+        int mid = low + (high-low)/2;
+        if(arr[mid]==target){
+            return mid;
+        }else if (target<arr[mid]){
+            return recursiveApproach(arr,low,mid-1,target);
+        }else {
+            return recursiveApproach(arr,mid+1,high,target);
+        }
     }
 }
