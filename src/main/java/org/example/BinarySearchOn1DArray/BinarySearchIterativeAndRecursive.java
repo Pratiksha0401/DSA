@@ -14,16 +14,15 @@ public class BinarySearchIterativeAndRecursive {
         int index=-1;
         int low=0;
         int high=arr.length-1;
-        int mid = low + (high-low)/2;
-        for(int i=low;i< high;i++){
-            if(arr[i]==target){
-                index=i;
-            }else if (target<mid){
+        while (low<=high){
+            int mid = low + (high-low)/2;
+            if(arr[mid]==target){
+                index=mid;
+                break;
+            }else if (target<arr[mid]){
                 high=mid-1;
-                mid= low + (high-low)/2;
             }else {
                 low=mid+1;
-                mid =low + (high-low)/2;
             }
         }
         return index;
