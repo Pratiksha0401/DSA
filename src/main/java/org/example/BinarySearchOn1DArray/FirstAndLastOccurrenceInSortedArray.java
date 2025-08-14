@@ -5,12 +5,50 @@ public class FirstAndLastOccurrenceInSortedArray {
     public static void main(String args[]) {
         int n = 7;
         int key = 13;
-        int[] v = {3,4,13,13,13,20,40};
+        int[] v = {3, 4, 13, 13, 13, 20, 40};
 
-        // returning the last occurrence index if the element is present otherwise -1
-        System.out.println(last(n, key, v));
+        // returning the first and last occurrence index if the element is present otherwise -1
+        System.out.println("First occurrence of " + key + " = " + first(n, key, v));
+        System.out.println("Last occurrence of " + key + " = " + last(n, key, v));
     }
 
+    /**
+     * Finds the first occurrence index of the given key in the array.
+     *
+     * @param n   the size of the array
+     * @param key the target element to search
+     * @param v   the input array
+     * @return index of the first occurrence of key, or -1 if not found
+     *
+     * Time Complexity: O(n)
+     *   - In the worst case, the loop scans the whole array once.
+     * Space Complexity: O(1)
+     *   - Only a constant amount of extra space is used.
+     */
+    public static int first(int n, int key, int[] v) {
+        int res = -1;
+        for (int i = 0; i < n; i++) {
+            if (v[i] == key) {
+                res = i;
+                break;
+            }
+        }
+        return res;
+    }
+
+    /**
+     * Finds the last occurrence index of the given key in the array.
+     *
+     * @param n   the size of the array
+     * @param key the target element to search
+     * @param v   the input array
+     * @return index of the last occurrence of key, or -1 if not found
+     *
+     * Time Complexity: O(n)
+     *   - In the worst case, the loop scans the whole array once.
+     * Space Complexity: O(1)
+     *   - Only a constant amount of extra space is used.
+     */
     public static int last(int n, int key, int[] v) {
         int res = -1;
         for (int i = n - 1; i >= 0; i--) {
@@ -21,5 +59,4 @@ public class FirstAndLastOccurrenceInSortedArray {
         }
         return res;
     }
-
 }
