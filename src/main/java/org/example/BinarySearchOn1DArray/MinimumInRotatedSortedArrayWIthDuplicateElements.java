@@ -28,6 +28,10 @@ public class MinimumInRotatedSortedArrayWIthDuplicateElements {
         int[] arr = {4, 5, 4, 5, 0, 1, 0, 1, 2, 2};
         final int min = findMinWithDuplicateElements(arr, arr.length);
         System.out.println("Minimum element: " + min);
+
+        int[] arr1 = { 1};
+        final int min1 = findMinWithDuplicateElements(arr1, arr1.length);
+        System.out.println("Minimum element1: " + min1);
     }
 
     /**
@@ -50,6 +54,7 @@ public class MinimumInRotatedSortedArrayWIthDuplicateElements {
 
             // If duplicates exist on both sides, shrink range
             if (arr[low] == arr[mid] && arr[mid] == arr[high]) {
+                min = Math.min(min, arr[low]);
                 low++;
                 high--;
                 continue;
