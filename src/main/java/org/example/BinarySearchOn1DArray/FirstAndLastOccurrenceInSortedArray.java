@@ -7,6 +7,11 @@ public class FirstAndLastOccurrenceInSortedArray {
         int key = 13;
         int[] v = {3, 4, 13, 13, 13, 20, 40};
 
+        final int[] ints = firstAndLastOccurrence(v, v.length, 13);
+        for (int s : ints){
+            System.out.print(s+",");
+        }
+        System.out.println();
         // returning the first and last occurrence index if the element is present otherwise -1
         System.out.println("First occurrence of " + key + " = " + first(n, key, v));
         System.out.println("Last occurrence of " + key + " = " + last(n, key, v));
@@ -128,5 +133,41 @@ public class FirstAndLastOccurrenceInSortedArray {
             }
         }
         return res;
+    }
+
+    public static int lowerBound(int[] arr, int n , int target){
+        int ans = -1;
+        int low=0,high=n-1;
+        while(low<=high){
+            int mid=low+(high-low)/2;
+            if(arr[mid]>=target){
+                ans=mid;
+                high = mid-1;
+            }else{
+                low = mid + 1;
+            }
+        }
+        return ans;
+    }
+
+    public static int upperBound(int[] arr, int n , int target){
+        int ans = -1;
+        int low=0,high=n-1;
+        while(low<=high){
+            int mid=low+(high-low)/2;
+            if(arr[mid]>target){
+                ans=mid;
+                high = mid-1;
+            }else{
+                low = mid + 1;
+            }
+        }
+        return ans;
+    }
+
+    public static int[] firstAndLastOccurrence(int[] arr, int n , int target){
+        int lb = lowerBound(arr, n, target);
+        if(lb==n || arr[lb]!=target) return new int[]{-1, -1};
+        return new int[]{lb, upperBound(arr, n, target) - 1};
     }
 }
