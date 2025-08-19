@@ -93,8 +93,10 @@ public class PeakElementInArray {
                 low = mid + 1;
             }
             // Otherwise → peak must be on left
-            else {
+            else if (arr[mid] < arr[mid - 1]) {
                 high = mid - 1;
+            }else{
+                low = mid+1;
             }
         }
 
