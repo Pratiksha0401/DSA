@@ -1,36 +1,113 @@
 package org.example.BinarySearchOn1DArray;
 
+/**
+ * This class provides methods to find the single non-duplicate element
+ * in a sorted array where every other element appears exactly twice.
+ * <p>
+ * Example:
+ * arr = {1, 1, 2, 2, 3, 3, 4, 5, 5}
+ * Output = 4
+ * </p>
+ */
 public class SearchSingleElementInSortedArray {
+
     public static void main(String[] args) {
         int[] arr = {1, 1, 2, 2, 3, 3, 4, 5, 5, 6, 6};
         final int singleElement = findSingleElementBruteForce(arr, arr.length);
-        System.out.println(singleElement);
+        System.out.println("Single element in arr = " + singleElement);
 
-        int[] arr2 = {1, 1, 2, 2, 3, 3, 4,4, 5, 5, 6, 6};
+        int[] arr2 = {1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6};
         final int singleElement2 = findSingleElementBruteForce(arr2, arr2.length);
-        System.out.println(singleElement2);
+        System.out.println("Single element in arr2 = " + singleElement2);
 
-        int[] arr3 = {1, 1, 2, 2, 3, 3, 4,4, 5, 5, 6, 6,7};
+        int[] arr3 = {1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7};
         final int singleElement3 = findSingleElementBruteForce(arr3, arr3.length);
-        System.out.println(singleElement3);
+        System.out.println("Single element in arr3 = " + singleElement3);
 
-        int[] arr4 = {2, 3, 3, 4,4, 5, 5, 6, 6};
+        int[] arr4 = {2, 3, 3, 4, 4, 5, 5, 6, 6};
         final int singleElement4 = findSingleElementBruteForce(arr4, arr4.length);
-        System.out.println(singleElement4);
+        System.out.println("Single element in arr4 = " + singleElement4);
+
+        int[] arr5 = {1, 1, 2, 2, 3, 3, 4, 5, 5, 6, 6};
+        final int singleElement5 = findSingleElementOptimal(arr5, arr5.length);
+        System.out.println("Single element in arr5 = " + singleElement5);
+
+        int[] arr6 = {1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6};
+        final int singleElement6 = findSingleElementOptimal(arr6, arr6.length);
+        System.out.println("Single element in arr6 = " + singleElement6);
+
+        int[] arr7 = {1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7};
+        final int singleElement7 = findSingleElementOptimal(arr7, arr7.length);
+        System.out.println("Single element in arr7 = " + singleElement7);
+
+        int[] arr8 = {2, 3, 3, 4, 4, 5, 5, 6, 6};
+        final int singleElement8 = findSingleElementOptimal(arr8, arr8.length);
+        System.out.println("Single element in arr8 = " + singleElement8);
     }
 
-    public static int findSingleElementBruteForce(int[] arr, int n){
-        int ele =  -1;
+    /**
+     * Finds the single non-duplicate element in a sorted array where
+     * every other element appears exactly twice using linear scan.
+     *
+     * @param arr Sorted integer array
+     * @param n   Length of the array
+     * @return The single element if found, otherwise -1
+     *
+     * Time Complexity: O(n) - we scan the array once
+     * Space Complexity: O(1) - no extra space used
+     */
+    public static int findSingleElementBruteForce(int[] arr, int n) {
+        int ele = -1;
         for (int i = 0; i < n; i++) {
-            if(n==1) return arr[0];
-            if(i==0 && arr[i]!=arr[i+1]) return arr[0];
-            else if(i==n-1 && arr[i]!=arr[i-1]) return arr[n-1];
-            else{
-                if(i>0 && i<n-1 && arr[i]!=arr[i+1] && arr[i]!=arr[i-1]){
-                    return arr[i];
+            if (n == 1) return arr[0];
+            if (i == 0 && arr[i] != arr[i + 1]) return arr[0]; // First element unique
+            else if (i == n - 1 && arr[i] != arr[i - 1]) return arr[n - 1]; // Last element unique
+            else {
+                if (i > 0 && i < n - 1 && arr[i] != arr[i + 1] && arr[i] != arr[i - 1]) {
+                    return arr[i]; // Middle element unique
                 }
             }
         }
-        return ele;
+        return ele; // If no single element found
+    }
+
+    /**
+     * Finds the single non-duplicate element in a sorted array using
+     * Binary Search. This method leverages the property that pairs of
+     * elements occur at even-odd indices before the single element,
+     * and the pattern breaks after the single element.
+     *
+     * @param arr Sorted integer array
+     * @param n   Length of the array
+     * @return The single element if found, otherwise -1
+     *
+     * Time Complexity: O(log n) - binary search halves the search space
+     * Space Complexity: O(1) - no extra space used
+     */
+    public static int findSingleElementOptimal(int[] arr, int n) {
+        int ele = -1;
+
+        // Edge cases
+        if (arr[0] != arr[1]) return arr[0];
+        if (arr[n - 1] != arr[n - 2]) return arr[n - 1];
+
+        int low = 1, high = n - 2;
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+
+            // Check if mid is the unique element
+            if (arr[mid] != arr[mid + 1] && arr[mid] != arr[mid - 1]) {
+                return arr[mid];
+            }
+
+            // Decide search direction based on index parity
+            if ((mid % 2 == 1 && arr[mid] == arr[mid - 1]) ||
+                    (mid % 2 == 0 && arr[mid] == arr[mid + 1])) {
+                low = mid + 1; // Single element lies to the right
+            } else {
+                high = mid - 1; // Single element lies to the left
+            }
+        }
+        return ele; // If no single element found
     }
 }
