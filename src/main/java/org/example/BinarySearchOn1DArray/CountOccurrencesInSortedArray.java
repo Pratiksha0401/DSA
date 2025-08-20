@@ -117,6 +117,7 @@ public class CountOccurrencesInSortedArray {
         return new int[] {first, last};
     }
 
+
     /**
      * Counts the total occurrences of x in a sorted array using binary search.
      *
