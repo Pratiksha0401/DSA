@@ -46,6 +46,7 @@ class SumTask extends RecursiveTask<Long> {
         // Split task (FORK)
         int mid = (start + end) / 2;
 
+
         SumTask leftTask = new SumTask(start, mid);
         SumTask rightTask = new SumTask(mid + 1, end);
 
